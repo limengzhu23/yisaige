@@ -40,7 +40,7 @@
     <!--AOP-->
     <aop:config>
         <!--设置切入点-->
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.system.service.impl.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.yisaige.service.impl.*.*(..))"/>
     </aop:config>
 
 </beans>

@@ -14,7 +14,7 @@
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!--组件扫描器-->
-    <context:component-scan base-package="com.system.realm" />
+    <context:component-scan base-package="com.yisaige.realm" />
 
     <!-- shiro过滤器bean，id要和web.xml中filter-name一致 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">

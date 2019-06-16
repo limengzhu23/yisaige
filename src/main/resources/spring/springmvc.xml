@@ -35,7 +35,7 @@
         <property name="converters">
             <set>
                 <!-- 日期类型转换 -->
-                <bean class="com.system.controller.converter.CustomDateConverter"/>
+                <bean class="com.yisaige.controller.converter.CustomDateConverter"/>
             </set>
         </property>
     </bean>
@@ -44,12 +44,12 @@
     并注册添加到 spring 容器中
     这里扫描 controller，指定controller的包
     -->
-    <context:component-scan base-package="com.system.controller"/>
+    <context:component-scan base-package="com.yisaige.controller"/>
 
     <!--全局错误信息处理器
     只要实现HandlerExceptionResolver接口就是全局异常处理器
     -->
-    <bean class="com.system.exception.CustomExceptionResolver"/>
+    <bean class="com.yisaige.exception.CustomExceptionResolver"/>
 
     <!--视图解析器-->
     <!--
@@ -61,5 +61,33 @@
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+    <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+                <value>application/json</value>
+                <value>application/*+json</value>
+            </list>
+        </property>
+    </bean>
 
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="mappingJacksonHttpMessageConverter" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding">
+            <value>UTF-8</value>
+        </property>
+        <property name="maxUploadSize">
+            <value>10485760</value><!-- 10M -->
+        </property>
+        <property name="maxInMemorySize">
+            <value>4096</value>
+        </property>
+    </bean>
 </beans>
